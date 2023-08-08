@@ -27,7 +27,7 @@ function SelectBox(props: Props) {
     popUp = false,
     onChange,
     valid = true,
-    placeholder = "Search here",
+    placeholder = "Search here ...",
   } = props;
 
   const Overlay = useRef<null | HTMLDivElement>(null);
@@ -125,6 +125,10 @@ function SelectBox(props: Props) {
     }
   }, [show, popUp]);
 
+  useEffect(() => {
+    setPopUp(popUp);
+  }, [popUp]);
+
   return (
     <>
       <div className="relative w-full">
@@ -174,7 +178,7 @@ function SelectBox(props: Props) {
           } ${show ? "" : "collapse"}`}
         >
           {/* default option */}
-          {options.length <= 5 && (
+          {!searchBox && (
             <button
               type="button"
               onClick={selectDefault}

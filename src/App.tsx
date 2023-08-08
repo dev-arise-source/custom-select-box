@@ -23,6 +23,7 @@ function App() {
         <div className="max-w-lg mx-auto">
           <SelectBox
             // popUp
+            searchBox={false}
             label="What is your favourite programing language?"
             options={languageOption}
           />
@@ -30,6 +31,7 @@ function App() {
           <br />
           <SelectBox
             // popUp
+            placeholder="Select Framework"
             label="What is your favourite framework?"
             options={frameworkOption}
           />
