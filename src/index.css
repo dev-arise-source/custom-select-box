@@ -5,3 +5,8 @@
 .red {
   border: 2px solid red !important;
 }
+.hide_scroll_bar::-webkit-scrollbar {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}

@@ -15,8 +15,6 @@ type Props = {
   popUp?: boolean;
   defaultOption?: SelectOption;
   valid?: boolean;
-  errorColor?: string;
-  successColor?: string;
   onChange?: (e: SelectOption) => void;
 };
 
@@ -94,6 +92,8 @@ function SelectBox(props: Props) {
     setOptions(newOption);
   }, [search, options]);
 
+  useEffect(() => {}, []);
+
   return (
     <>
       <div className="relative w-full">
@@ -132,35 +132,42 @@ function SelectBox(props: Props) {
 
         {/* select options wrapper */}
         <ul
-          className={`border z-[99999] drop-shadow-x max-h-[90vh] w-[inherit] min-w-[280px] overflow-y-auto hide_scroll_bar bg-white ${
+          className={`border z-[99999] drop-shadow-x w-[inherit] min-w-[280px] overflow-y-auto bg-white hide_scroll_bar ${
             popUp
-              ? "fixed max-w-sm left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] rounded"
-              : "absolute top-[100%]"
+              ? "fixed max-w-sm max-h-[350px] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] rounded"
+              : "absolute top-[100%] max-h-[90vh]"
           } ${show ? "" : "hidden"}`}
         >
           {/* default option */}
-          {options.length < 5 && (
+          {options.length <= 5 && (
             <button
               type="button"
               onClick={selectDefault}
               className="cursor-pointer text-left text-gray-300 bg-gray-50/30 hover:bg-blue-50/50 w-full p-2"
             >
-              {defaultOpt.title}
+              {getDefault().title}
             </button>
           )}
 
           {/* search box */}
           {searchBox && options.length > 5 && (
-            <div className="flex items-center border border-blue-100 mx-auto w-[80%] my-4 px-2">
-              <input
-                className="w-full py-2 outline-none"
-                onChange={(e) => setSearch(e.currentTarget.value)}
-                value={search}
-                type="text"
-                placeholder={placeholder}
-              />
+            <div className="sticky top-0 bg-white pb-2">
+              <p className="tracking-wide font-normal text-center p-2 text-base text-gray-500 mt-1">
+                Selected:{" "}
+                <span className="text-blue-400"> {selected.title}</span>
+              </p>
 
-              <SearchIcon className="h-4 w-4 text-gray-300" />
+              <div className="flex items-center border border-blue-100 mx-auto w-[80%] mt-1 px-2">
+                <input
+                  className="w-full py-2 outline-none"
+                  onChange={(e) => setSearch(e.currentTarget.value)}
+                  value={search}
+                  type="text"
+                  placeholder={placeholder}
+                />
+
+                <SearchIcon className="h-4 w-4 text-gray-300" />
+              </div>
             </div>
           )}
 

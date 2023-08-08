@@ -1,31 +1,5 @@
 import SelectBox from "./selectBox";
-
-const options = [
-  {
-    title: "JavaScript",
-    value: "js",
-  },
-  {
-    title: "Python",
-    value: "jpi1",
-  },
-  {
-    title: "Python",
-    value: "jpi2",
-  },
-  {
-    title: "Python",
-    value: "jpi3",
-  },
-  {
-    title: "Python",
-    value: "jpi4",
-  },
-  {
-    title: "Python",
-    value: "jpi5",
-  },
-];
+import { frameworkOption, roleOption, languageOption } from "./assets/option";
 
 function App() {
   return (
@@ -40,17 +14,28 @@ function App() {
       </div>
 
       {/* main Ui */}
-      <div className="w-full max-w-sm md:max-w-lg mx-auto min-h-[500px] bg-white p-5">
-        <SelectBox
-          popUp
-          label="What is your favourite programing language?"
-          options={options}
-        />
-        <SelectBox
-          popUp
-          label="What is your favourite programing language?"
-          options={options}
-        />
+      <section className="w-full max-w-2xl mx-auto min-h-[500px] bg-white p-5">
+        <div className="max-w-lg mx-auto">
+          <SelectBox
+            // popUp
+            label="What is your favourite programing language?"
+            options={languageOption}
+          />
+
+          <br />
+          <SelectBox
+            // popUp
+            label="What is your favourite framework?"
+            options={frameworkOption}
+          />
+
+          <br />
+          <SelectBox
+            popUp
+            label="What is your favourite Role?"
+            options={roleOption}
+          />
+        </div>
 
         {/* <select name="Hello" id="">
           <option value="hell">Hello 1</option>
@@ -62,7 +47,7 @@ function App() {
           <option value="hell">Hello 7</option>
           <option value="hell">Hello 8</option>
         </select> */}
-      </div>
+      </section>
     </main>
   );
 }
