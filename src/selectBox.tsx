@@ -85,7 +85,7 @@ function SelectBox(props: Props) {
       {/* select box */}
       <div
         onClick={showSelectModal}
-        className={`flex items-center px-3 sm:px-5 rounded-[10px] border-2 cursor-pointer ${
+        className={`flex bg-white items-center px-3 sm:px-5 rounded-[10px] border-2 cursor-pointer ${
           label && "mt-3"
         } ${!valid && "border-red-600"}`}
       >
@@ -98,8 +98,12 @@ function SelectBox(props: Props) {
           {selected.title}
         </p>
 
-        <span>
-          <CaretDown />
+        <span
+          className={`transition-transform ease-out ${
+            show ? "rotate-180" : "rotate-0"
+          }`}
+        >
+          <CaretDown className="text-black" />
         </span>
       </div>
 
