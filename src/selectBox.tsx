@@ -31,13 +31,15 @@ function SelectBox(props: Props) {
   } = props;
 
   const Overlay = useRef<null | HTMLDivElement>(null);
+  const OptionsWrapper = useRef<null | HTMLUListElement>(null);
+  const SelectBox = useRef<null | HTMLDivElement>(null);
 
   function getDefault(): SelectOption {
     if (defaultOption) return defaultOption;
 
-    console.log(
-      `You did not pass a default option at ${label} select box . default could be a titled description of your select box with a value of an empty string ""`
-    );
+    // console.log(
+    //   `You did not pass a default option at ${label} select box . default could be a titled description of your select box with a value of an empty string ""`
+    // );
 
     return {
       title: "Select an option",
@@ -50,6 +52,8 @@ function SelectBox(props: Props) {
   const [isDefault, setIsDefault] = useState(true);
   const [search, setSearch] = useState("");
   const [_options, setOptions] = useState(options);
+  const [_popUp, setPopUp] = useState(popUp);
+  const [position, setPosition] = useState<"top" | "bottom">("bottom");
 
   function onChangeHandler(onchange: Props["onChange"]) {
     if (onChange) {
@@ -92,7 +96,34 @@ function SelectBox(props: Props) {
     setOptions(newOption);
   }, [search, options]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (popUp) return;
+    if (!SelectBox.current || !OptionsWrapper.current) return;
+    const wrapper = OptionsWrapper.current;
+    const selectBox = SelectBox.current;
+
+    // select box rect
+    const rect = selectBox.getBoundingClientRect();
+    const selectBoxTop = rect.top;
+    const selectBoxBottom = rect.bottom;
+
+    const wrapperHeight = wrapper.getBoundingClientRect().height;
+    const deviceHeight = window.innerHeight;
+
+    const spaceBelowSelectBox = deviceHeight - selectBoxBottom;
+    const spaceAboveSelectBox = selectBoxTop;
+
+    if (wrapperHeight < spaceBelowSelectBox) {
+      setPosition("bottom");
+      return console.log("enough space at the bottom");
+    } else if (wrapperHeight < spaceAboveSelectBox) {
+      setPosition("top");
+      return console.log("enough space at the top");
+    } else {
+      setPopUp(true);
+      return console.log("wrapper is too long");
+    }
+  }, [show, popUp]);
 
   return (
     <>
@@ -104,14 +135,15 @@ function SelectBox(props: Props) {
 
         {/* select box */}
         <div
+          ref={SelectBox}
           onClick={showSelectModal}
           className={`bg-white flex items-center px-3 sm:px-5 rounded-[10px] border-2 cursor-pointer ${
             label && "mt-3"
-          } ${!valid && "border-red-600"}`}
+          } ${!valid && "border-red-600"} `}
         >
           {/* selceted option displayed */}
           <p
-            className={`w-full flex items-center h-11 md:h-12  truncate ${
+            className={`w-full flex items-center h-11  truncate ${
               isDefault
                 ? "text-gray-500 font-extralight"
                 : "text-black font-normal"
@@ -132,11 +164,14 @@ function SelectBox(props: Props) {
 
         {/* select options wrapper */}
         <ul
+          ref={OptionsWrapper}
           className={`border z-[99999] drop-shadow-x w-[inherit] min-w-[280px] overflow-y-auto bg-white hide_scroll_bar ${
-            popUp
+            _popUp
               ? "fixed max-w-sm max-h-[350px] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] rounded"
-              : "absolute top-[100%] max-h-[90vh]"
-          } ${show ? "" : "hidden"}`}
+              : `absolute max-h-[90vh] ${
+                  position === "bottom" ? "top-[100%]" : "bottom-[100%]"
+                }`
+          } ${show ? "" : "collapse"}`}
         >
           {/* default option */}
           {options.length <= 5 && (

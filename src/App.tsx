@@ -1,5 +1,10 @@
 import SelectBox from "./selectBox";
-import { frameworkOption, roleOption, languageOption } from "./assets/option";
+import {
+  frameworkOption,
+  roleOption,
+  languageOption,
+  uiOption,
+} from "./assets/option";
 
 function App() {
   return (
@@ -34,6 +39,19 @@ function App() {
             popUp
             label="What is your favourite Role?"
             options={roleOption}
+          />
+          <br />
+          <SelectBox
+            popUp
+            label="What is your favourite framework?"
+            options={frameworkOption}
+          />
+          <br />
+
+          <SelectBox
+            // popUp
+            label="What is your favourite CSS Framework"
+            options={uiOption}
           />
         </div>
 

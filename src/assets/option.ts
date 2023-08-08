@@ -53,6 +53,11 @@ const frameworkOption = [
     title: "Flutter",
     value: "flutter",
   },
+
+  {
+    title: "Express",
+    value: "express",
+  },
 ];
 const roleOption = [
   {
@@ -72,5 +77,39 @@ const roleOption = [
     value: "ml",
   },
 ];
+const uiOption = [
+  {
+    title: "Bootsrap",
+    value: "bs",
+  },
+  {
+    title: "Tailwind Css",
+    value: "tc",
+  },
+  {
+    title: "Chakra",
+    value: "ch",
+  },
+  {
+    title: "Material UI",
+    value: "mui",
+  },
+  {
+    title: "Cuppertino",
+    value: "cu",
+  },
+  {
+    title: "Vanilla css",
+    value: "vanilla",
+  },
+  {
+    title: "Styled components",
+    value: "styled",
+  },
+  {
+    title: "Sass",
+    value: "sass",
+  },
+];
 
-export { languageOption, frameworkOption, roleOption };
+export { languageOption, frameworkOption, roleOption, uiOption };
