@@ -40,8 +40,14 @@ function App() {
       </div>
 
       {/* main Ui */}
-      <div className="w-full max-w-sm md:max-w-md mx-auto min-h-[500px] bg-white p-5">
+      <div className="w-full max-w-sm md:max-w-lg mx-auto min-h-[500px] bg-white p-5">
         <SelectBox
+          popUp
+          label="What is your favourite programing language?"
+          options={options}
+        />
+        <SelectBox
+          popUp
           label="What is your favourite programing language?"
           options={options}
         />

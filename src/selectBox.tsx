@@ -10,6 +10,7 @@ type SelectOption = {
 type Props = {
   options: SelectOption[];
   label?: string;
+  placeholder?: string;
   searchBox?: boolean;
   popUp?: boolean;
   defaultOption?: SelectOption;
@@ -28,6 +29,7 @@ function SelectBox(props: Props) {
     popUp = false,
     onChange,
     valid = true,
+    placeholder = "Search here",
   } = props;
 
   const Overlay = useRef<null | HTMLDivElement>(null);
@@ -103,7 +105,7 @@ function SelectBox(props: Props) {
         {/* select box */}
         <div
           onClick={showSelectModal}
-          className={`z-[99999] relative flex items-center px-3 sm:px-5 rounded-[10px] border-2 cursor-pointer ${
+          className={`bg-white flex items-center px-3 sm:px-5 rounded-[10px] border-2 cursor-pointer ${
             label && "mt-3"
           } ${!valid && "border-red-600"}`}
         >
@@ -130,8 +132,10 @@ function SelectBox(props: Props) {
 
         {/* select options wrapper */}
         <ul
-          className={`absolute top-[100%] z-[99999] drop-shadow-xl max-h-[90vh] w-[inherit] min-w-[280px] overflow-y-auto hide_scroll_bar bg-white ${
-            popUp ? "" : ""
+          className={`border z-[99999] drop-shadow-x max-h-[90vh] w-[inherit] min-w-[280px] overflow-y-auto hide_scroll_bar bg-white ${
+            popUp
+              ? "fixed max-w-sm left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] rounded"
+              : "absolute top-[100%]"
           } ${show ? "" : "hidden"}`}
         >
           {/* default option */}
@@ -147,13 +151,13 @@ function SelectBox(props: Props) {
 
           {/* search box */}
           {searchBox && options.length > 5 && (
-            <div className="flex items-center border border-blue-100 mx-auto w-[80%] my-3 px-2">
+            <div className="flex items-center border border-blue-100 mx-auto w-[80%] my-4 px-2">
               <input
                 className="w-full py-2 outline-none"
                 onChange={(e) => setSearch(e.currentTarget.value)}
                 value={search}
                 type="text"
-                placeholder="search here"
+                placeholder={placeholder}
               />
 
               <SearchIcon className="h-4 w-4 text-gray-300" />
@@ -180,7 +184,9 @@ function SelectBox(props: Props) {
         <div
           onClick={() => setShow(false)}
           ref={Overlay}
-          className="fixed left-0 right-0 bottom-0 top-0  bg-transparent z-[9999]"
+          className={`${
+            popUp ? "bg-neutral-900/10" : "bg-transparent"
+          } fixed left-0 right-0 bottom-0 top-0 z-[9999]`}
         />
       )}
     </>
