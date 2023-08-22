@@ -110,6 +110,42 @@ const uiOption = [
     title: "Sass",
     value: "sass",
   },
+  // {
+  //   title: "Less",
+  //   value: "less",
+  // },
+  // {
+  //   title: "Tailwind",
+  //   value: "tailwind",
+  // },
+  // {
+  //   title: "Daisy UI",
+  //   value: "daisy",
+  // },
+  // {
+  //   title: "Material Design",
+  //   value: "material",
+  // },
+  // {
+  //   title: "Tester",
+  //   value: "Tester",
+  // },
+  // {
+  //   title: "Tester1",
+  //   value: "Tester1",
+  // },
+  // {
+  //   title: "Tester2",
+  //   value: "Tester2",
+  // },
+  // {
+  //   title: "Tester3",
+  //   value: "Tester3",
+  // },
+  // {
+  //   title: "Tester4",
+  //   value: "Tester4",
+  // },
 ];
 
 export { languageOption, frameworkOption, roleOption, uiOption };

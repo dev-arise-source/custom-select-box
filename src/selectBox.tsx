@@ -75,6 +75,7 @@ function SelectBox(props: Props) {
     setSelected(opt);
     setIsDefault(false);
     hideSelectModal();
+    setSearch("");
   }
 
   function selectDefault() {
@@ -97,7 +98,7 @@ function SelectBox(props: Props) {
   }, [search, options]);
 
   useEffect(() => {
-    if (popUp) return;
+    if (popUp) return; // needless running the logic
     if (!SelectBox.current || !OptionsWrapper.current) return;
     const wrapper = OptionsWrapper.current;
     const selectBox = SelectBox.current;
@@ -169,7 +170,7 @@ function SelectBox(props: Props) {
         {/* select options wrapper */}
         <ul
           ref={OptionsWrapper}
-          className={`border z-[99999] drop-shadow-x w-[inherit] min-w-[280px] overflow-y-auto bg-white hide_scroll_bar ${
+          className={`border z-[99999] w-[inherit] min-w-[280px] overflow-y-auto bg-white hide_scroll_bar ${
             _popUp
               ? "fixed max-w-sm max-h-[350px] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] rounded"
               : `absolute max-h-[90vh] ${
@@ -178,7 +179,7 @@ function SelectBox(props: Props) {
           } ${show ? "" : "collapse"}`}
         >
           {/* default option */}
-          {!searchBox && (
+          {(!searchBox || options.length < 6) && (
             <button
               type="button"
               onClick={selectDefault}
@@ -231,7 +232,7 @@ function SelectBox(props: Props) {
           onClick={() => setShow(false)}
           ref={Overlay}
           className={`${
-            popUp ? "bg-neutral-900/10" : "bg-transparent"
+            _popUp ? "bg-neutral-900/10" : "bg-transparent"
           } fixed left-0 right-0 bottom-0 top-0 z-[9999]`}
         />
       )}
