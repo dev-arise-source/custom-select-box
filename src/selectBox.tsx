@@ -99,6 +99,8 @@ function SelectBox(props: Props) {
 
   useEffect(() => {
     if (popUp) return; // needless running the logic
+    setPopUp(false); // when options change dynamically,
+
     if (!SelectBox.current || !OptionsWrapper.current) return;
     const wrapper = OptionsWrapper.current;
     const selectBox = SelectBox.current;
@@ -108,12 +110,13 @@ function SelectBox(props: Props) {
     const selectBoxTop = rect.top;
     const selectBoxBottom = rect.bottom;
 
-    const wrapperHeight = wrapper.getBoundingClientRect().height;
+    const wrapperHeight = wrapper.getBoundingClientRect().height + 100; // more like adding padding
     const deviceHeight = window.innerHeight;
 
     const spaceBelowSelectBox = deviceHeight - selectBoxBottom;
     const spaceAboveSelectBox = selectBoxTop;
 
+    // if checks .....
     if (wrapperHeight < spaceBelowSelectBox) {
       setPosition("bottom");
       return console.log("enough space at the bottom");
@@ -124,7 +127,7 @@ function SelectBox(props: Props) {
       setPopUp(true);
       return console.log("wrapper is too long");
     }
-  }, [show, popUp]);
+  }, [show, popUp, options]);
 
   useEffect(() => {
     setPopUp(popUp);
