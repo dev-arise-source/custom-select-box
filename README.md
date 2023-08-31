@@ -2,7 +2,7 @@
 
 To follow along with the coding tutorial, find the youtube videon in the link below.
 
-- [Youtube ](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)
+- [Youtube ](https://youtu.be/glVNyeqNI5I)
 
 ## To Run This Project
 
